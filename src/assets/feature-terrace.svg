@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">Terasering sawah dari ketinggian</title>
+  <desc id="desc">Ilustrasi terasering sawah bergaya kontur, tema warna AgriNova.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F4F2E9"/>
+      <stop offset="1" stop-color="#DCE4D6"/>
+    </linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1C6B4F"/>
+      <stop offset="1" stop-color="#143D2E"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="600" fill="url(#sky)"/>
+
+  <!-- Kontur horizon -->
+  <g fill="none" stroke="#A85A2E" stroke-width="2" opacity="0.25">
+    <path d="M0 300 C 300 260 600 320 1200 280"/>
+    <path d="M0 360 C 300 320 600 380 1200 340"/>
+  </g>
+
+  <!-- Petak sawah berjenjang -->
+  <g>
+    <path d="M0 400 L1200 400 L1200 600 L0 600 Z" fill="url(#field)" opacity="0.9"/>
+    <path d="M0 400 Q300 380 600 408 T1200 400 L1200 500 L0 500 Z" fill="#1C6B4F"/>
+    <path d="M0 500 Q300 480 600 508 T1200 500 L1200 600 L0 600 Z" fill="#173D2E"/>
+  </g>
+
+  <!-- Garis pantul air antar petak -->
+  <g stroke="#D9A441" stroke-width="1.5" opacity="0.5">
+    <path d="M0 402 Q300 382 600 410 T1200 402"/>
+    <path d="M0 502 Q300 482 600 510 T1200 502"/>
+  </g>
+
+  <!-- Rumpun padi -->
+  <g fill="#2E8B66">
+    <ellipse cx="150" cy="450" rx="8" ry="22"/>
+    <ellipse cx="170" cy="448" rx="8" ry="22"/>
+    <ellipse cx="330" cy="560" rx="8" ry="22"/>
+    <ellipse cx="350" cy="558" rx="8" ry="22"/>
+    <ellipse cx="900" cy="455" rx="8" ry="22"/>
+    <ellipse cx="920" cy="453" rx="8" ry="22"/>
+    <ellipse cx="1050" cy="565" rx="8" ry="22"/>
+    <ellipse cx="1070" cy="563" rx="8" ry="22"/>
+  </g>
+
+  <!-- Aksen data ringan -->
+  <g stroke="#3B87C4" stroke-opacity="0.3" stroke-width="1.5">
+    <path d="M840 110 Q 900 130 960 105"/>
+    <path d="M860 120 Q 900 145 940 120" fill="none"/>
+    <circle cx="900" cy="118" r="4" fill="#3B87C4" fill-opacity="0.4"/>
+  </g>
+</svg>

@@ -1,0 +1,38 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'AgriNova — Bertani Presisi dengan AI',
+  description = 'AgriNova membaca cuaca, mendeteksi penyakit tanaman, dan mengingatkan jadwal tanam — bahkan saat sinyal susah.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#12231C" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="antialiased">
+    <a
+      href="#konten"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-[60] focus:top-4 focus:left-4 focus:bg-terrace-green focus:text-mist-paper focus:px-4 focus:py-2 focus:rounded-lg font-sans"
+    >
+      Lewati ke konten utama
+    </a>
+    <slot />
+  </body>
+</html>

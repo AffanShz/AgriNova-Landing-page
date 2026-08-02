@@ -1,0 +1,42 @@
+---
+import Icon from './Icon.astro';
+---
+
+<nav class="fixed top-0 z-50 w-full border-b border-clay-soil/15 bg-mist-paper/90 backdrop-blur-md">
+  <div class="container-agrinova flex items-center justify-between py-4">
+    <a href="#top" class="flex items-center gap-3 group" aria-label="AgriNova — ke halaman atas">
+      <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-terrace-green text-mist-paper transition-transform duration-200 group-hover:-translate-y-0.5">
+        <Icon name="leaf" class="h-5 w-5" />
+      </span>
+      <span class="font-display text-xl font-bold tracking-tight text-sawah-deep">AgriNova</span>
+    </a>
+
+    <div class="hidden items-center gap-8 md:flex">
+      <a
+        href="#fitur"
+        class="font-sans text-base font-semibold text-sawah-deep/70 transition-colors duration-200 hover:text-terrace-green"
+      >
+        Fitur
+      </a>
+      <a
+        href="#cara-kerja"
+        class="font-sans text-base font-semibold text-sawah-deep/70 transition-colors duration-200 hover:text-terrace-green"
+      >
+        Cara Kerja
+      </a>
+      <a
+        href="#unduh"
+        class="font-sans text-base font-semibold text-sawah-deep/70 transition-colors duration-200 hover:text-terrace-green"
+      >
+        Unduh
+      </a>
+    </div>
+
+    <a
+      href="#unduh"
+      class="hover-lift hidden rounded-lg bg-terrace-green px-6 py-3 font-sans text-base font-semibold text-mist-paper transition-transform duration-200 active:scale-95 sm:inline-flex"
+    >
+      Mulai Sekarang
+    </a>
+  </div>
+</nav>

@@ -1,0 +1,401 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ContourDivider from '../components/ContourDivider.astro';
+import ScanDemo from '../components/ScanDemo.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import Icon from '../components/Icon.astro';
+
+const langkah = [
+  {
+    icon: 'camera',
+    judul: 'Foto',
+    deskripsi: 'Ambil foto daun atau batang yang bermasalah di lapangan, bahkan saat sinyal susah.',
+  },
+  {
+    icon: 'scan',
+    judul: 'Analisis AI',
+    deskripsi: 'Model AI membaca pola bercak dan membandingkannya dengan pustaka penyakit tanaman lokal.',
+  },
+  {
+    icon: 'checklist',
+    judul: 'Rekomendasi',
+    deskripsi: 'Terima langkah penanganan dan jadwal yang jelas, dalam bahasa sehari-hari.',
+  },
+];
+
+const offlinePoin = [
+  {
+    icon: 'cloudoff',
+    judul: 'Offline cache',
+    deskripsi: 'Hasil scan dan rekomendasi tersimpan di perangkat, siap dibuka di mana pun.',
+  },
+  {
+    icon: 'lock',
+    judul: 'Enkripsi data',
+    deskripsi: 'Data ladang Anda dienkripsi dan tidak pernah dijual kepada pihak ketiga.',
+  },
+  {
+    icon: 'leaf',
+    judul: 'Sumber rekomendasi',
+    deskripsi: 'Setiap saran berdasar pustaka penyakit dan pupuk yang diverifikasi ahli pertanian lokal.',
+  },
+];
+
+const testimoni = [
+  {
+    kutipan: 'NovaScan menangkap penyakit padi saya dua minggu lebih awal dari biasanya.',
+    nama: 'Pak Sutrisno',
+    daerah: 'Karawang, Jawa Barat',
+    inisial: 'S',
+    tone: 'terrace',
+  },
+  {
+    kutipan: 'Rekomendasi pemupukannya masuk akal, dan hasil panen naik hampir 20%.',
+    nama: 'Bu Endang',
+    daerah: 'Sleman, DI Yogyakarta',
+    inisial: 'E',
+    tone: 'clay',
+  },
+  {
+    kutipan: 'Karena bahasanya dekat, saya pakai tiap hari tanpa perlu minta bantuan siapa pun.',
+    nama: 'Pak Made',
+    daerah: 'Tabanan, Bali',
+    inisial: 'M',
+    tone: 'sky',
+  },
+];
+
+const avatarTone = {
+  terrace: 'bg-terrace-green text-mist-paper',
+  clay: 'bg-clay-soil text-mist-paper',
+  sky: 'bg-sky-data text-mist-paper',
+};
+
+// Pola QR placeholder deterministik (finder 3 sudut + modul acak)
+function seeded(seed: number) {
+  return () => {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
+}
+const rnd = seeded(7);
+const qr = Array.from({ length: 21 }, (_, r) =>
+  Array.from({ length: 21 }, (_, c) => {
+    const inFinder = (r < 7 && c < 7) || (r < 7 && c > 13) || (r > 13 && c < 7);
+    if (inFinder) return true;
+    return rnd() < 0.46;
+  }),
+);
+---
+
+<Layout>
+  <Nav />
+
+  <main id="konten">
+    <!-- HERO -->
+    <section id="top" class="contour-bg relative flex min-h-[100svh] items-center pt-28 pb-16 md:pt-32 md:pb-24">
+      <div class="container-agrinova grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+        <div>
+          <p class="mb-6 inline-flex items-center gap-2 rounded-md bg-sawah-deep px-3 py-1 font-mono text-data text-mist-paper/90">
+            <span class="h-1.5 w-1.5 rounded-full bg-sky-data"></span>
+            AI VISION TERESTRIAL
+          </p>
+          <h1 class="font-display text-2xl font-bold tracking-tight text-sawah-deep sm:text-3xl">
+            Bertani presisi, mulai dari satu foto daun.
+          </h1>
+          <p class="mt-6 max-w-lg text-lg text-sawah-deep/70">
+            AgriNova membaca cuaca, mendeteksi penyakit tanaman, dan mengingatkan jadwal tanam — bahkan saat
+            sinyal susah.
+          </p>
+          <div class="mt-10 flex flex-wrap items-center gap-4">
+            <a
+              href="#unduh"
+              class="hover-lift inline-flex items-center gap-2 rounded-lg bg-terrace-green px-8 py-4 font-sans text-base font-semibold text-mist-paper transition-transform duration-200 active:scale-95"
+            >
+              <Icon name="download" class="h-5 w-5" />
+              Unduh AgriNova
+            </a>
+            <a
+              href="#cara-kerja"
+              class="hover-lift inline-flex items-center gap-2 rounded-lg border border-terrace-green bg-transparent px-8 py-4 font-sans text-base font-semibold text-terrace-green transition-transform duration-200 active:scale-95"
+            >
+              Lihat cara kerjanya
+              <Icon name="arrowright" class="h-5 w-5" />
+            </a>
+          </div>
+        </div>
+
+        <ScanDemo class="mx-auto w-full max-w-[560px]" />
+      </div>
+    </section>
+
+    <ContourDivider density={3} tone="clay" />
+
+    <!-- KONTEKS -->
+    <section class="bg-mist-paper py-16 md:py-24">
+      <div class="container-agrinova grid grid-cols-1 items-start gap-12 md:grid-cols-2 md:gap-16">
+        <div>
+          <h2 class="font-display text-xl text-sawah-deep">
+            Bertani bukan hanya soal menebak cuaca.
+          </h2>
+          <p class="mt-6 text-base text-sawah-deep/70">
+            Perubahan iklim dan penyakit tanaman semakin sulit diprediksi. Petani sering kali harus mengambil
+            keputusan berdasarkan insting atau kebiasaan lama yang mungkin tidak lagi relevan dengan kondisi
+            tanah dan cuaca saat ini.
+          </p>
+        </div>
+        <div class="border-l border-clay-soil/30 pl-8 md:pl-12">
+          <h2 class="font-display text-xl text-terrace-green">
+            Keputusan tepat berbasis data lokal.
+          </h2>
+          <p class="mt-6 text-base text-sawah-deep/70">
+            Kami menerjemahkan data satelit dan sensor lokal menjadi rekomendasi harian yang mudah dipahami.
+            AgriNova memberikan kepastian langkah demi langkah, dari masa tanam hingga panen, memastikan setiap
+            tetes pupuk dan air digunakan secara optimal.
+          </p>
+          <div class="relative mt-10 h-20 overflow-hidden" aria-hidden="true">
+            <svg class="parallax-contour absolute inset-0 h-[200%] w-full" viewBox="0 0 480 80" preserveAspectRatio="none">
+              <path d="M0 40 C 80 24, 160 56, 240 40 S 400 24, 480 40" fill="none" stroke="#A85A2E" stroke-width="1.5" opacity="0.35" />
+              <path d="M0 55 C 80 40, 160 70, 240 55 S 400 40, 480 55" fill="none" stroke="#1C6B4F" stroke-width="1.5" opacity="0.25" />
+            </svg>
+          </div>
+          <p class="mt-4 inline-flex items-center gap-2 rounded-md bg-sawah-deep px-3 py-2 font-mono text-data text-mist-paper/90">
+            <span class="h-2 w-2 rounded-sm bg-sky-data"></span>
+            Hujan +3 hari · 78% kelembapan · Waktu semprot optimal
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <ContourDivider density={4} tone="green" />
+
+    <!-- FITUR -->
+    <section id="fitur" class="bg-mist-paper py-16 md:py-24">
+      <div class="container-agrinova">
+        <h2 class="mb-12 text-center font-display text-2xl text-sawah-deep">Instrumen Pertanian Modern</h2>
+
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:auto-rows-[300px]">
+          <!-- NovaScan (besar) -->
+          <FeatureCard
+            icon="target"
+            title="NovaScan"
+            description="Identifikasi instan hama dan penyakit hanya dengan mengambil foto daun atau batang tanaman yang bermasalah."
+            variant="large"
+            class="md:col-span-2 md:row-span-2"
+            badges={[
+              { label: 'AI Vision', tone: 'sky' },
+              { label: 'Offline Mode', tone: 'gold' },
+            ]}
+          />
+
+          <!-- NovaWeather (kecil) -->
+          <FeatureCard
+            icon="suncloud"
+            title="Mikro Cuaca"
+            description="Prakiraan cuaca spesifik hingga level desa, bukan sekadar prediksi kabupaten."
+            class="md:col-span-1"
+          />
+
+          <!-- Asisten Tani (kecil) -->
+          <FeatureCard
+            icon="chat"
+            title="Asisten Tani AI"
+            description="Tanya jawab pertanian 24/7 dengan bahasa daerah lokal."
+            tone="deep"
+            class="md:col-span-1"
+          />
+
+          <!-- Katalog Obat (kecil) -->
+          <FeatureCard
+            icon="pill"
+            title="Katalog Obat"
+            description="Rekomendasi takaran pupuk dan pestisida sesuai usia tanaman."
+            class="md:col-span-1"
+          />
+
+          <!-- NovaCalendar (besar) -->
+          <div class="clay-border hover-lift flex flex-col rounded-xl bg-mist-paper p-8 md:col-span-2 md:flex-row md:items-center md:gap-10">
+            <div class="flex-1">
+              <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-clay-soil/10 text-clay-soil">
+                <Icon name="calendar" class="h-6 w-6" />
+              </div>
+              <h3 class="mt-5 font-display text-xl text-sawah-deep">Jadwal Tanam Dinamis</h3>
+              <p class="mt-2 max-w-md text-base text-sawah-deep/70">
+                Kalender pintar yang menyesuaikan jadwal tanam, pupuk, dan panen berdasarkan data iklim
+                real-time, bukan hanya tanggal kalender.
+              </p>
+            </div>
+            <div class="mt-8 w-full rounded-lg border border-clay-soil/25 bg-mist-paper p-4 md:mt-0 md:w-1/3" aria-hidden="true">
+              <div class="h-4 w-3/4 rounded bg-terrace-green/20"></div>
+              <div class="mt-2 h-4 w-1/2 rounded bg-paddy-gold/40"></div>
+              <div class="mt-8 flex h-8 items-center justify-center rounded border border-sky-data/40 bg-sawah-deep">
+                <span class="font-mono text-data text-mist-paper/90">Fase Vegetatif</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ContourDivider density={5} tone="clay" />
+
+    <!-- CARA KERJA -->
+    <section id="cara-kerja" class="bg-mist-paper py-16 md:py-24">
+      <div class="container-agrinova">
+        <div class="mb-3 flex justify-center">
+          <p class="inline-flex items-center gap-2 rounded-md bg-sawah-deep px-3 py-1 font-mono text-data text-mist-paper/90">
+            <span class="h-1.5 w-1.5 rounded-full bg-sky-data"></span>
+            TIGA LANGKAH
+          </p>
+        </div>
+        <h2 class="mb-14 text-center font-display text-2xl text-sawah-deep">Cara kerja AgriNova</h2>
+
+        <div class="relative grid grid-cols-1 gap-10 md:grid-cols-3">
+          <!-- jalur kontur horizontal -->
+          <div class="absolute left-[16.6%] right-[16.6%] top-10 hidden h-6 md:block" aria-hidden="true">
+            <svg class="h-full w-full" viewBox="0 0 300 24" preserveAspectRatio="none">
+              <path d="M0 12 C 40 4, 80 20, 120 12 S 200 4, 240 12 S 280 16, 300 12" fill="none" stroke="#A85A2E" stroke-width="1.5" opacity="0.4" stroke-dasharray="6 6" />
+            </svg>
+          </div>
+
+          {langkah.map((l, i) => (
+            <div class="relative flex flex-col items-center text-center">
+              <div class="relative z-10 flex h-20 w-20 items-center justify-center rounded-full border border-clay-soil/35 bg-mist-paper text-terrace-green">
+                <Icon name={l.icon} class="h-8 w-8" />
+                <span class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-paddy-gold font-mono text-data text-sawah-deep">
+                  {i + 1}
+                </span>
+              </div>
+              <h3 class="mt-6 font-display text-lg text-sawah-deep">{l.judul}</h3>
+              <p class="mt-2 max-w-xs text-sm text-sawah-deep/70">{l.deskripsi}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <ContourDivider density={6} tone="green" />
+
+    <!-- OFFLINE -->
+    <section class="bg-sawah-deep py-16 md:py-24">
+      <div class="container-agrinova">
+        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <div>
+            <p class="mb-3 inline-flex items-center gap-2 rounded-md border border-mist-paper/15 bg-mist-paper/5 px-3 py-1 font-mono text-data text-mist-paper/90">
+              <Icon name="cloudoff" class="h-4 w-4 text-sky-data" />
+              MODE OFFLINE
+            </p>
+            <h2 class="font-display text-2xl text-mist-paper">
+              Ladang tidak selalu ada sinyal. AgriNova tetap jalan.
+            </h2>
+            <p class="mt-6 max-w-md text-base text-mist-paper/60">
+              Semua yang Anda butuhkan saat di sawah — deteksi penyakit, jadwal, dan catatan — tersedia tanpa
+              koneksi, dengan data tetap aman di perangkat Anda.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 gap-6 sm:grid-cols-3 lg:grid-cols-1">
+            {offlinePoin.map((p) => (
+              <div class="flex items-start gap-4 rounded-xl border border-mist-paper/10 bg-mist-paper/5 p-5">
+                <span class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-paddy-gold/15 text-paddy-gold">
+                  <Icon name={p.icon} class="h-5 w-5" />
+                </span>
+                <div>
+                  <h3 class="font-display text-lg text-mist-paper">{p.judul}</h3>
+                  <p class="mt-1.5 text-sm text-mist-paper/60">{p.deskripsi}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONI -->
+    <section class="bg-mist-paper py-16 md:py-24">
+      <div class="container-agrinova">
+        <div class="mb-3 flex justify-center">
+          <p class="inline-flex rounded-md bg-sawah-deep px-3 py-1 font-mono text-data text-paddy-gold">
+            DARI LADANG KE LADANG
+          </p>
+        </div>
+        <h2 class="mb-14 text-center font-display text-2xl text-sawah-deep">Suara petani pengguna</h2>
+
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {testimoni.map((t) => (
+            <figure class="clay-border hover-lift flex flex-col rounded-xl bg-mist-paper p-7">
+              <svg class="mb-4 h-6 w-8 text-terrace-green/30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M10 7v6a5 5 0 0 1-5 5H4v-2h1a3 3 0 0 0 3-3H4V7h6Zm10 0v6a5 5 0 0 1-5 5h-1v-2h1a3 3 0 0 0 3-3h-4V7h6Z" />
+              </svg>
+              <blockquote class="flex-1 text-base text-sawah-deep/80">“{t.kutipan}”</blockquote>
+              <figcaption class="mt-6 flex items-center gap-3">
+                <span class={`flex h-11 w-11 items-center justify-center rounded-full font-display text-lg ${avatarTone[t.tone]}`}>
+                  {t.inisial}
+                </span>
+                <div>
+                  <p class="font-sans text-sm font-semibold text-sawah-deep">{t.nama}</p>
+                  <p class="font-mono text-data text-sawah-deep/70">{t.daerah}</p>
+                </div>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA UNDUH -->
+    <section id="unduh" class="bg-sawah-deep py-16 md:py-24">
+      <div class="container-agrinova">
+        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <div>
+            <h2 class="font-display text-2xl text-mist-paper">Satu foto. Ladang yang lebih sehat.</h2>
+            <p class="mt-6 max-w-md text-base text-mist-paper/60">
+              Gratis diunduh, langsung dipakai di lapangan. Mulai dari petak paling kecil sekalipun.
+            </p>
+            <div class="mt-10 flex flex-wrap gap-4">
+              <a
+                href="#unduh"
+                class="hover-lift flex items-center gap-3 rounded-xl border border-mist-paper/20 bg-mist-paper px-6 py-3 text-sawah-deep transition-transform duration-200 active:scale-95"
+                aria-label="Unduh AgriNova di Google Play"
+              >
+                <Icon name="play" class="h-6 w-6" />
+                <span class="text-left">
+                  <span class="block font-mono text-data text-sawah-deep/60">Tersedia di</span>
+                  <span class="block font-sans text-base font-semibold">Google Play</span>
+                </span>
+              </a>
+              <a
+                href="#unduh"
+                class="hover-lift flex items-center gap-3 rounded-xl border border-mist-paper/20 bg-mist-paper px-6 py-3 text-sawah-deep transition-transform duration-200 active:scale-95"
+                aria-label="Unduh AgriNova di App Store"
+              >
+                <Icon name="apple" class="h-6 w-6" />
+                <span class="text-left">
+                  <span class="block font-mono text-data text-sawah-deep/60">Unduh dari</span>
+                  <span class="block font-sans text-base font-semibold">App Store</span>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div class="mx-auto w-full max-w-[260px]">
+            <div class="rounded-xl border border-mist-paper/15 bg-mist-paper p-6">
+              <svg viewBox="0 0 21 21" class="h-full w-full" role="img" aria-label="Kode QR AgriNova (contoh)">
+                <rect width="21" height="21" fill="#F4F2E9" />
+                {qr.map((row, r) =>
+                  row.map((on, c) =>
+                    on ? <rect key={`${r}-${c}`} x={c} y={r} width="1" height="1" fill="#12231C" /> : null,
+                  ),
+                )}
+              </svg>
+              <p class="mt-4 text-center font-mono text-data text-sawah-deep/60">Scan untuk mengunduh</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

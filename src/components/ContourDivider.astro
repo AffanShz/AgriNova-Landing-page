@@ -1,0 +1,33 @@
+---
+interface Props {
+  density?: number;
+  tone?: 'clay' | 'green';
+}
+
+const { density = 4, tone = 'clay' } = Astro.props;
+const stroke = tone === 'clay' ? '#A85A2E' : '#1C6B4F';
+
+const height = 48 + density * 6;
+const rows = Array.from({ length: density }, (_, i) => {
+  const y = (height / (density + 0.5)) * (i + 1);
+  return { y, amp: 6 + (i % 2) * 4 };
+});
+---
+
+<div class="relative h-8 w-full overflow-hidden" aria-hidden="true">
+  <svg
+    class="parallax-contour absolute inset-0 h-[160%] w-full -top-[30%]"
+    viewBox={`0 0 1440 ${height}`}
+    preserveAspectRatio="none"
+  >
+    {rows.map((r) => (
+      <path
+        d={`M0 ${r.y} C 240 ${r.y - r.amp}, 420 ${r.y + r.amp}, 660 ${r.y} S 1140 ${r.y - r.amp}, 1440 ${r.y}`}
+        fill="none"
+        stroke={stroke}
+        stroke-width="1"
+        opacity="0.28"
+      />
+    ))}
+  </svg>
+</div>

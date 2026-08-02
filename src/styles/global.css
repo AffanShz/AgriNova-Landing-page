@@ -1,0 +1,150 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/fraunces/opsz.css';
+@import '@fontsource-variable/plus-jakarta-sans';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+
+@theme {
+  --font-display: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Skala teks per design.md */
+  --text-data: 0.75rem;
+  --text-data--line-height: 1.2;
+  --text-data--letter-spacing: 0.05em;
+  --text-data--font-weight: 500;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1rem;
+  --text-base--line-height: 1.6;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.6;
+  --text-xl: 1.75rem;
+  --text-xl--line-height: 1.3;
+  --text-2xl: 2.5rem;
+  --text-2xl--line-height: 1.2;
+  --text-3xl: 3.5rem;
+  --text-3xl--line-height: 1.1;
+
+  /* Hanya 6 token warna dari design.md */
+  --color-sawah-deep: #12231c;
+  --color-terrace-green: #1c6b4f;
+  --color-paddy-gold: #d9a441;
+  --color-sky-data: #3b87c4;
+  --color-clay-soil: #a85a2e;
+  --color-mist-paper: #f4f2e9;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    @apply bg-mist-paper text-sawah-deep font-sans text-base antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-terrace-green) 20%, transparent);
+  }
+
+  /* Focus state terlihat jelas — WCAG */
+  :focus-visible {
+    outline: 2px solid var(--color-terrace-green);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .container-agrinova {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 4rem);
+  }
+
+  /* Garis kontur terasering — pola latar hero */
+  .contour-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M-10 30 Q 40 0 90 25 T 200 20' fill='none' stroke='%23A85A2E' stroke-width='1' opacity='0.12'/%3E%3Cpath d='M-10 70 Q 40 40 90 65 T 200 60' fill='none' stroke='%231C6B4F' stroke-width='1' opacity='0.1'/%3E%3C/svg%3E");
+    background-size: 240px 240px;
+  }
+
+  /* Garis scan sekali-jalan — relatif terhadap kontainer */
+  .scan-line {
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--color-sky-data);
+    box-shadow: 0 0 14px var(--color-sky-data);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .scan-line.is-running {
+    animation: scan-once 1.6s cubic-bezier(0.22, 1, 0.36, 1) 1 forwards;
+  }
+
+  @keyframes scan-once {
+    0% {
+      top: -4px;
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 1;
+    }
+  }
+
+  .hover-lift {
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -14px rgba(168, 90, 46, 0.35);
+  }
+
+  .clay-border {
+    border: 1px solid color-mix(in srgb, var(--color-clay-soil) 45%, transparent);
+  }
+}
+
+/* Parallax kontur berbasis scroll (progressive: diam jika tidak didukung) */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .parallax-contour {
+      animation: contour-drift linear both;
+      animation-timeline: scroll();
+    }
+    @keyframes contour-drift {
+      from {
+        transform: translate3d(0, 12px, 0);
+      }
+      to {
+        transform: translate3d(0, -12px, 0);
+      }
+    }
+  }
+}

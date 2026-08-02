@@ -1,0 +1,63 @@
+---
+import Icon from './Icon.astro';
+
+interface Badge {
+  label: string;
+  tone: 'sky' | 'gold';
+}
+
+interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  variant?: 'large' | 'small';
+  tone?: 'paper' | 'deep';
+  badges?: Badge[];
+  class?: string;
+}
+
+const { icon, title, description, variant = 'small', tone = 'paper', badges = [], class: className = '' } = Astro.props;
+
+const isDeep = tone === 'deep';
+const isLarge = variant === 'large';
+
+const badgeTone: Record<Badge['tone'], string> = {
+  sky: 'bg-sky-data/20 text-mist-paper',
+  gold: 'bg-sawah-deep text-paddy-gold',
+};
+---
+
+<div
+  class={`clay-border rounded-xl hover-lift flex flex-col ${
+    isDeep ? 'bg-sawah-deep' : 'bg-mist-paper'
+  } ${isLarge ? 'p-8' : 'p-6'} ${className}`}
+>
+  <div
+    class={`flex items-center rounded-lg ${
+      isDeep ? 'bg-mist-paper/10 text-paddy-gold' : 'bg-terrace-green/10 text-terrace-green'
+    } ${isLarge ? 'h-12 w-12' : 'h-10 w-10'}`}
+  >
+    <Icon name={icon} class={`${isLarge ? 'h-6 w-6' : 'h-5 w-5'} mx-auto`} />
+  </div>
+
+  <h3
+    class={`mt-5 font-display ${
+      isDeep ? 'text-mist-paper' : 'text-sawah-deep'
+    } ${isLarge ? 'text-xl' : 'text-lg'}`}
+  >
+    {title}
+  </h3>
+  <p class={`mt-2 ${isDeep ? 'text-mist-paper/70' : 'text-sawah-deep/70'} ${isLarge ? 'text-base' : 'text-sm'}`}>
+    {description}
+  </p>
+
+  {
+    badges.length > 0 && (
+      <div class="mt-auto flex flex-wrap gap-2 pt-6">
+        {badges.map((b) => (
+          <span class={`rounded-md px-3 py-1 font-mono text-data ${badgeTone[b.tone]}`}>{b.label}</span>
+        ))}
+      </div>
+    )
+  }
+</div>
