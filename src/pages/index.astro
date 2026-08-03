@@ -73,6 +73,9 @@ const avatarTone = {
   sky: 'bg-sky-data text-mist-paper dark:text-sawah-deep',
 };
 
+const DOWNLOAD_URL =
+  'https://drive.google.com/file/d/1M6rAtWlulw2qfMgn2pfMk7-oIVH5v2oW/view?usp=sharing';
+
 // Pola QR placeholder deterministik (finder 3 sudut + modul acak)
 function seeded(seed: number) {
   return () => {
@@ -111,7 +114,9 @@ const qr = Array.from({ length: 21 }, (_, r) =>
           </p>
           <div class="mt-10 flex flex-wrap items-center gap-4">
             <a
-              href="#unduh"
+              href={DOWNLOAD_URL}
+              target="_blank"
+              rel="noopener"
               class="hover-lift inline-flex items-center gap-2 rounded-lg bg-terrace-green px-8 py-4 font-sans text-base font-semibold text-mist-paper dark:text-sawah-deep transition-transform duration-200 active:scale-95"
             >
               <Icon name="download" class="h-5 w-5" />
@@ -355,7 +360,9 @@ const qr = Array.from({ length: 21 }, (_, r) =>
             </p>
             <div class="mt-10 flex flex-wrap gap-4">
               <a
-                href="#unduh"
+                href={DOWNLOAD_URL}
+                target="_blank"
+                rel="noopener"
                 class="hover-lift flex items-center gap-3 rounded-xl border border-mist-paper/20 bg-mist-paper px-6 py-3 text-sawah-deep transition-transform duration-200 active:scale-95"
                 aria-label="Unduh AgriNova di Google Play"
               >
@@ -366,7 +373,9 @@ const qr = Array.from({ length: 21 }, (_, r) =>
                 </span>
               </a>
               <a
-                href="#unduh"
+                href={DOWNLOAD_URL}
+                target="_blank"
+                rel="noopener"
                 class="hover-lift flex items-center gap-3 rounded-xl border border-mist-paper/20 bg-mist-paper px-6 py-3 text-sawah-deep transition-transform duration-200 active:scale-95"
                 aria-label="Unduh AgriNova di App Store"
               >

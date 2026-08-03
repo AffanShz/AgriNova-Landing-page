@@ -1,5 +1,8 @@
 ---
 import Icon from './Icon.astro';
+
+const DOWNLOAD_URL =
+  'https://drive.google.com/file/d/1M6rAtWlulw2qfMgn2pfMk7-oIVH5v2oW/view?usp=sharing';
 ---
 
 <nav class="fixed top-0 z-50 w-full border-b border-clay-soil/15 bg-mist-paper/90 backdrop-blur-md">
@@ -45,7 +48,9 @@ import Icon from './Icon.astro';
       </button>
 
       <a
-        href="#unduh"
+        href={DOWNLOAD_URL}
+        target="_blank"
+        rel="noopener"
         class="hover-lift hidden rounded-lg bg-terrace-green px-6 py-3 font-sans text-base font-semibold text-mist-paper dark:text-sawah-deep transition-transform duration-200 active:scale-95 sm:inline-flex"
       >
         Mulai Sekarang
