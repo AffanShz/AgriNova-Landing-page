@@ -5,7 +5,7 @@ import Icon from './Icon.astro';
 <nav class="fixed top-0 z-50 w-full border-b border-clay-soil/15 bg-mist-paper/90 backdrop-blur-md">
   <div class="container-agrinova flex items-center justify-between py-4">
     <a href="#top" class="flex items-center gap-3 group" aria-label="AgriNova — ke halaman atas">
-      <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-terrace-green text-mist-paper transition-transform duration-200 group-hover:-translate-y-0.5">
+      <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-terrace-green text-mist-paper dark:text-sawah-deep transition-transform duration-200 group-hover:-translate-y-0.5">
         <Icon name="leaf" class="h-5 w-5" />
       </span>
       <span class="font-display text-xl font-bold tracking-tight text-sawah-deep">AgriNova</span>
@@ -32,11 +32,45 @@ import Icon from './Icon.astro';
       </a>
     </div>
 
-    <a
-      href="#unduh"
-      class="hover-lift hidden rounded-lg bg-terrace-green px-6 py-3 font-sans text-base font-semibold text-mist-paper transition-transform duration-200 active:scale-95 sm:inline-flex"
-    >
-      Mulai Sekarang
-    </a>
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        data-theme-toggle
+        aria-label="Ganti mode gelap/terang"
+        title="Ganti mode gelap/terang"
+        class="flex h-10 w-10 items-center justify-center rounded-lg border border-clay-soil/25 text-sawah-deep/70 transition-colors duration-200 hover:border-terrace-green hover:text-terrace-green"
+      >
+        <Icon name="moon" class="h-5 w-5 dark:hidden" />
+        <Icon name="sun" class="hidden h-5 w-5 dark:block" />
+      </button>
+
+      <a
+        href="#unduh"
+        class="hover-lift hidden rounded-lg bg-terrace-green px-6 py-3 font-sans text-base font-semibold text-mist-paper dark:text-sawah-deep transition-transform duration-200 active:scale-95 sm:inline-flex"
+      >
+        Mulai Sekarang
+      </a>
+    </div>
   </div>
 </nav>
+
+<script>
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+
+  function apply(dark: boolean) {
+    root.classList.toggle('dark', dark);
+    try {
+      localStorage.setItem('agrinova-theme', dark ? 'dark' : 'light');
+    } catch {}
+    if (meta) meta.content = dark ? '#0D1712' : '#12231C';
+  }
+
+  toggle?.addEventListener('click', () => apply(!root.classList.contains('dark')));
+
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+  media.addEventListener('change', (event) => {
+    if (!localStorage.getItem('agrinova-theme')) apply(event.matches);
+  });
+</script>

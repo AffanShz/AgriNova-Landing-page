@@ -68,9 +68,9 @@ const testimoni = [
 ];
 
 const avatarTone = {
-  terrace: 'bg-terrace-green text-mist-paper',
-  clay: 'bg-clay-soil text-mist-paper',
-  sky: 'bg-sky-data text-mist-paper',
+  terrace: 'bg-terrace-green text-mist-paper dark:text-sawah-deep',
+  clay: 'bg-clay-soil text-mist-paper dark:text-sawah-deep',
+  sky: 'bg-sky-data text-mist-paper dark:text-sawah-deep',
 };
 
 // Pola QR placeholder deterministik (finder 3 sudut + modul acak)
@@ -112,14 +112,14 @@ const qr = Array.from({ length: 21 }, (_, r) =>
           <div class="mt-10 flex flex-wrap items-center gap-4">
             <a
               href="#unduh"
-              class="hover-lift inline-flex items-center gap-2 rounded-lg bg-terrace-green px-8 py-4 font-sans text-base font-semibold text-mist-paper transition-transform duration-200 active:scale-95"
+              class="hover-lift inline-flex items-center gap-2 rounded-lg bg-terrace-green px-8 py-4 font-sans text-base font-semibold text-mist-paper dark:text-sawah-deep transition-transform duration-200 active:scale-95"
             >
               <Icon name="download" class="h-5 w-5" />
               Unduh AgriNova
             </a>
             <a
               href="#cara-kerja"
-              class="hover-lift inline-flex items-center gap-2 rounded-lg border border-terrace-green bg-transparent px-8 py-4 font-sans text-base font-semibold text-terrace-green transition-transform duration-200 active:scale-95"
+              class="hover-lift inline-flex items-center gap-2 rounded-lg border border-terrace-green bg-transparent px-8 py-4 font-sans text-base font-semibold text-terrace-green dark:text-sawah-deep transition-transform duration-200 active:scale-95"
             >
               Lihat cara kerjanya
               <Icon name="arrowright" class="h-5 w-5" />
@@ -147,7 +147,7 @@ const qr = Array.from({ length: 21 }, (_, r) =>
           </p>
         </div>
         <div class="border-l border-clay-soil/30 pl-8 md:pl-12">
-          <h2 class="font-display text-xl text-terrace-green">
+          <h2 class="font-display text-xl text-terrace-green dark:text-sawah-deep">
             Keputusan tepat berbasis data lokal.
           </h2>
           <p class="mt-6 text-base text-sawah-deep/70">
@@ -262,9 +262,9 @@ const qr = Array.from({ length: 21 }, (_, r) =>
 
           {langkah.map((l, i) => (
             <div class="relative flex flex-col items-center text-center">
-              <div class="relative z-10 flex h-20 w-20 items-center justify-center rounded-full border border-clay-soil/35 bg-mist-paper text-terrace-green">
+              <div class="relative z-10 flex h-20 w-20 items-center justify-center rounded-full border border-clay-soil/35 bg-mist-paper text-terrace-green dark:text-sawah-deep">
                 <Icon name={l.icon} class="h-8 w-8" />
-                <span class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-paddy-gold font-mono text-data text-sawah-deep">
+                <span class="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-paddy-gold font-mono text-data text-sawah-deep dark:text-mist-paper">
                   {i + 1}
                 </span>
               </div>
@@ -316,7 +316,7 @@ const qr = Array.from({ length: 21 }, (_, r) =>
     <section class="bg-mist-paper py-16 md:py-24">
       <div class="container-agrinova">
         <div class="mb-3 flex justify-center">
-          <p class="inline-flex rounded-md bg-sawah-deep px-3 py-1 font-mono text-data text-paddy-gold">
+          <p class="inline-flex rounded-md bg-sawah-deep px-3 py-1 font-mono text-data text-paddy-gold dark:bg-mist-paper">
             DARI LADANG KE LADANG
           </p>
         </div>

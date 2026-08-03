@@ -22,14 +22,26 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#12231C" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem('agrinova-theme');
+          const dark = stored
+            ? stored === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (dark) document.documentElement.classList.add('dark');
+        } catch {}
+      })();
+    </script>
   </head>
   <body class="antialiased">
     <a
       href="#konten"
-      class="sr-only focus:not-sr-only focus:absolute focus:z-[60] focus:top-4 focus:left-4 focus:bg-terrace-green focus:text-mist-paper focus:px-4 focus:py-2 focus:rounded-lg font-sans"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-[60] focus:top-4 focus:left-4 focus:bg-terrace-green focus:text-mist-paper focus:dark:text-sawah-deep focus:px-4 focus:py-2 focus:rounded-lg font-sans"
     >
       Lewati ke konten utama
     </a>

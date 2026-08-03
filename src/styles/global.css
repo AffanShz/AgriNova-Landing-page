@@ -36,6 +36,14 @@
   --color-mist-paper: #f4f2e9;
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Dark mode: remap token latar & teks (dipakai oleh utility via var()). */
+:root.dark {
+  --color-mist-paper: #0d1712;
+  --color-sawah-deep: #f4f2e9;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -56,6 +64,10 @@
     outline: 2px solid var(--color-terrace-green);
     outline-offset: 3px;
     border-radius: 4px;
+  }
+
+  :root.dark :focus-visible {
+    outline-color: var(--color-sawah-deep);
   }
 
   @media (prefers-reduced-motion: reduce) {

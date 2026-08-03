@@ -22,8 +22,8 @@ const isDeep = tone === 'deep';
 const isLarge = variant === 'large';
 
 const badgeTone: Record<Badge['tone'], string> = {
-  sky: 'bg-sky-data/20 text-mist-paper',
-  gold: 'bg-sawah-deep text-paddy-gold',
+  sky: 'bg-sky-data/20 text-mist-paper dark:text-sawah-deep',
+  gold: 'bg-sawah-deep text-paddy-gold dark:bg-mist-paper',
 };
 ---
 
@@ -34,7 +34,7 @@ const badgeTone: Record<Badge['tone'], string> = {
 >
   <div
     class={`flex items-center rounded-lg ${
-      isDeep ? 'bg-mist-paper/10 text-paddy-gold' : 'bg-terrace-green/10 text-terrace-green'
+      isDeep ? 'bg-mist-paper/10 text-paddy-gold' : 'bg-terrace-green/10 text-terrace-green dark:text-sawah-deep'
     } ${isLarge ? 'h-12 w-12' : 'h-10 w-10'}`}
   >
     <Icon name={icon} class={`${isLarge ? 'h-6 w-6' : 'h-5 w-5'} mx-auto`} />
