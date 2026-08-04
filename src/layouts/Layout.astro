@@ -1,14 +1,17 @@
 ---
 import '../styles/global.css';
+import { SITE_URL } from '../lib/site';
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const {
   title = 'AgriNova — Bertani Presisi dengan AI',
   description = 'AgriNova membaca cuaca, mendeteksi penyakit tanaman, dan mengingatkan jadwal tanam — bahkan saat sinyal susah.',
+  image = '/og-cover.webp',
 } = Astro.props;
 ---
 
@@ -22,6 +25,16 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={SITE_URL} />
+    <meta property="og:image" content={`${SITE_URL}${image}`} />
+    <meta property="og:image:alt" content="AgriNova — scan daun untuk deteksi penyakit tanaman" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${SITE_URL}${image}`} />
+    <link rel="canonical" href={SITE_URL} />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#12231C" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
