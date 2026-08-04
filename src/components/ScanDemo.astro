@@ -10,12 +10,11 @@ const { class: className = '' } = Astro.props;
 ---
 
 <div
-  data-scandemo
-  class={`relative aspect-square overflow-hidden rounded-2xl bg-sawah-deep clay-border ${className}`}
+  class={`relative aspect-square overflow-hidden rounded-2xl bg-sawah-deep ${className}`}
 >
   <Image
     src={heroLeaf}
-    alt="Foto contoh daun padi dengan bercak penyakit, dipindai oleh NovaScan"
+    alt=""
     class="h-full w-full object-cover opacity-80"
     loading="eager"
     fetchpriority="high"
@@ -25,19 +24,16 @@ const { class: className = '' } = Astro.props;
   />
 
   <!-- Lapisan data ringan -->
-  <div class="pointer-events-none absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(59,135,196,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(59,135,196,0.5)_1px,transparent_1px)] [background-size:48px_48px]" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(59,135,196,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(59,135,196,0.5)_1px,transparent_1px)] [background-size:48px_48px]"></div>
 
-  <!-- Garis scan -->
-  <div class="scan-line" data-scanline></div>
+  <!-- Garis scan sekali-jalan saat load -->
+  <div class="scan-line is-running" aria-hidden="true"></div>
 
   <!-- Badge hasil AI -->
-  <div
-    data-result
-    class="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-clay-soil/40 bg-sawah-deep/90 p-3 backdrop-blur-sm"
-  >
+  <div class="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-clay-soil/40 bg-sawah-deep/90 p-3">
     <div class="flex items-center gap-3">
       <span class="flex h-9 w-9 items-center justify-center rounded-md bg-sky-data/15 text-sky-data">
-        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
           <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10" />
         </svg>
       </span>
@@ -46,46 +42,5 @@ const { class: className = '' } = Astro.props;
         <p class="font-mono text-data text-mist-paper/70">87% keyakinan</p>
       </div>
     </div>
-    <button
-      type="button"
-      data-scanbutton
-      class="rounded-md bg-terrace-green px-3 py-1.5 font-sans text-sm font-semibold text-mist-paper dark:text-sawah-deep transition-transform duration-200 active:scale-95"
-    >
-      Scan ulang
-    </button>
   </div>
 </div>
-
-<script>
-  const root = document.querySelector<HTMLElement>('[data-scandemo]');
-  const line = root?.querySelector<HTMLElement>('[data-scanline]');
-  const button = root?.querySelector<HTMLButtonElement>('[data-scanbutton]');
-
-  const prefersReduced =
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function runScan() {
-    if (!line) return;
-    if (prefersReduced) {
-      line.style.top = '100%';
-      line.style.opacity = '1';
-      return;
-    }
-    line.classList.remove('is-running');
-    // paksa reflow agar animasi bisa diulang
-    void line.offsetWidth;
-    line.classList.add('is-running');
-  }
-
-  if (button) {
-    button.addEventListener('click', runScan);
-  }
-
-  // Satu momen orkestrasi: scan saat halaman dimuat
-  if (typeof requestAnimationFrame !== 'undefined') {
-    requestAnimationFrame(() => requestAnimationFrame(runScan));
-  } else {
-    runScan();
-  }
-</script>
