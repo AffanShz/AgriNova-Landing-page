@@ -6,6 +6,7 @@ import ContourDivider from '../components/ContourDivider.astro';
 import ScanDemo from '../components/ScanDemo.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import Icon from '../components/Icon.astro';
+import { DOWNLOAD_URL } from '../lib/site';
 
 const langkah = [
   {
@@ -73,9 +74,6 @@ const avatarTone = {
   sky: 'bg-sky-data text-mist-paper dark:text-sawah-deep',
 };
 
-const DOWNLOAD_URL =
-  'https://drive.google.com/file/d/1M6rAtWlulw2qfMgn2pfMk7-oIVH5v2oW/view?usp=sharing';
-
 // Pola QR placeholder deterministik (finder 3 sudut + modul acak)
 function seeded(seed: number) {
   return () => {
@@ -102,10 +100,10 @@ const qr = Array.from({ length: 21 }, (_, r) =>
       <div class="container-agrinova grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
         <div>
           <p class="mb-6 inline-flex items-center gap-2 rounded-md bg-sawah-deep px-3 py-1 font-mono text-data text-mist-paper/90">
-            <span class="h-1.5 w-1.5 rounded-full bg-sky-data"></span>
+            <span class="h-1.5 w-1.5 rounded-full bg-terrace-green"></span>
             AI VISION TERESTRIAL
           </p>
-          <h1 class="font-display text-2xl font-bold tracking-tight text-sawah-deep sm:text-3xl">
+          <h1 class="font-display font-bold tracking-tight text-sawah-deep text-[clamp(2rem,5.5vw,3.5rem)]">
             Bertani presisi, mulai dari satu foto daun.
           </h1>
           <p class="mt-6 max-w-lg text-lg text-sawah-deep/70">
@@ -251,7 +249,7 @@ const qr = Array.from({ length: 21 }, (_, r) =>
       <div class="container-agrinova">
         <div class="mb-3 flex justify-center">
           <p class="inline-flex items-center gap-2 rounded-md bg-sawah-deep px-3 py-1 font-mono text-data text-mist-paper/90">
-            <span class="h-1.5 w-1.5 rounded-full bg-sky-data"></span>
+            <span class="h-1.5 w-1.5 rounded-full bg-terrace-green"></span>
             TIGA LANGKAH
           </p>
         </div>
