@@ -33,22 +33,24 @@ const badgeTone: Record<Badge['tone'], string> = {
     isDeep ? 'bg-sawah-deep' : 'bg-mist-paper'
   } ${isLarge ? 'p-8' : 'p-6'} ${className}`}
 >
-  {/* Sticker illustration — only for large cards */}
-  {hasSticker && isLarge && (
-    <div class="mb-4 flex justify-center">
-      <div class="h-32 w-32">
+  {/* Sticker illustration — large cards get bigger, small cards get regular */}
+  {hasSticker && (
+    <div class={`mb-5 flex justify-center ${isLarge ? 'px-0' : 'px-4'}`}>
+      <div class={`[&>svg]:block [&>svg]:h-auto [&>svg]:w-full ${isLarge ? 'w-48' : 'w-32'}`}>
         <slot name="sticker" />
       </div>
     </div>
   )}
 
-  <div
-    class={`flex items-center rounded-lg ${
-      isDeep ? 'bg-mist-paper/10 text-paddy-gold' : 'bg-terrace-green/10 text-terrace-green dark:text-sawah-deep'
-    } ${isLarge ? 'h-12 w-12' : 'h-10 w-10'}`}
-  >
-    <Icon name={icon} class={`${isLarge ? 'h-6 w-6' : 'h-5 w-5'} mx-auto`} />
-  </div>
+  {!hasSticker && (
+    <div
+      class={`flex items-center justify-center rounded-xl ${
+        isDeep ? 'bg-mist-paper/10 text-paddy-gold' : 'bg-terrace-green/10 text-terrace-green dark:text-sawah-deep'
+      } ${isLarge ? 'h-14 w-14' : 'h-11 w-11'}`}
+    >
+      <Icon name={icon} class={`${isLarge ? 'h-7 w-7' : 'h-5 w-5'}`} />
+    </div>
+  )}
 
   <h3
     class={`mt-5 font-display ${

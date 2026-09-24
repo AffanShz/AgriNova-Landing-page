@@ -185,7 +185,7 @@ const qr = Array.from({ length: 21 }, (_, r) =>
       <div class="container-agrinova">
         <h2 class="mb-12 text-center font-display text-2xl text-sawah-deep">Instrumen Pertanian Modern</h2>
 
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:auto-rows-[300px]">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:auto-rows-[minmax(300px,auto)]">
           <!-- NovaScan (besar) -->
           <FeatureCard
             icon="target"
@@ -207,7 +207,9 @@ const qr = Array.from({ length: 21 }, (_, r) =>
             title="NovaWeather"
             description="Cuaca real-time & prakiraan 7 hari via OpenWeatherMap, deteksi risiko hama berbasis cuaca, dan peringatan iklim darurat."
             class="md:col-span-1"
-          />
+          >
+            <Fragment slot="sticker" set:html={stickerWeather} />
+          </FeatureCard>
 
           <!-- Asisten Tani (kecil) -->
           <FeatureCard
@@ -216,7 +218,9 @@ const qr = Array.from({ length: 21 }, (_, r) =>
             description="Chatbot khusus pertanian bertenang Gemini 2.5 Flash. Tanya soal hama, pupuk, atau cuaca, kapan saja."
             tone="deep"
             class="md:col-span-1"
-          />
+          >
+            <Fragment slot="sticker" set:html={stickerChat} />
+          </FeatureCard>
 
           <!-- Katalog Obat Tanaman (kecil) -->
           <FeatureCard
@@ -224,7 +228,9 @@ const qr = Array.from({ length: 21 }, (_, r) =>
             title="Katalog Obat Tanaman"
             description="Direktori obat, pupuk, dan dosis aman dari database JSON offline — tanpa kuota internet."
             class="md:col-span-1"
-          />
+          >
+            <Fragment slot="sticker" set:html={stickerBook} />
+          </FeatureCard>
 
           <!-- NovaCalendar (besar) -->
           <FeatureCard

@@ -116,7 +116,7 @@ const ICONS: Record<string, IconDef> = {
   ICONS[name] && (
     <svg
       viewBox="0 0 24 24"
-      class={className}
+      class={`shrink-0 ${className}`}
       fill={ICONS[name].fill ? 'currentColor' : 'none'}
       stroke={ICONS[name].fill ? 'none' : 'currentColor'}
       stroke-width={ICONS[name].sw ?? 1.8}
