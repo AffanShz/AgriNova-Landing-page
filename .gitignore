@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 design.md
 AGENTS.md
+.agents/
+.claude/
+skills-lock.json
