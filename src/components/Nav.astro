@@ -1,15 +1,13 @@
 ---
 import Icon from './Icon.astro';
+import Logo from './Logo.astro';
 import { DOWNLOAD_URL } from '../lib/site';
 ---
 
 <nav class="fixed top-0 z-50 w-full border-b border-clay-soil/15 bg-mist-paper/90 backdrop-blur-md">
   <div class="container-agrinova flex items-center justify-between py-4">
-    <a href="#top" class="flex items-center gap-3 group" aria-label="AgriNova — ke halaman atas">
-      <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-terrace-green text-mist-paper dark:text-sawah-deep transition-transform duration-200 group-hover:-translate-y-0.5">
-        <Icon name="leaf" class="h-5 w-5" />
-      </span>
-      <span class="font-display text-xl font-bold tracking-tight text-sawah-deep">AgriNova</span>
+    <a href="#top" class="flex items-center transition-transform duration-200 group-hover:-translate-y-0.5 group" aria-label="AgriNova — ke halaman atas">
+      <Logo class="h-8 w-auto" />
     </a>
 
     <div class="hidden items-center gap-8 md:flex">

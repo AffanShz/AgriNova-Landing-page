@@ -8,6 +8,12 @@ import FeatureCard from '../components/FeatureCard.astro';
 import Icon from '../components/Icon.astro';
 import { DOWNLOAD_URL } from '../lib/site';
 
+import stickerScan from '../assets/figma/sticker-scan.svg?raw';
+import stickerWeather from '../assets/figma/sticker-weather.svg?raw';
+import stickerChat from '../assets/figma/sticker-chat.svg?raw';
+import stickerBook from '../assets/figma/sticker-book.svg?raw';
+import stickerCalendar from '../assets/figma/sticker-calendar.svg?raw';
+
 const langkah = [
   {
     icon: 'camera',
@@ -30,16 +36,16 @@ const offlinePoin = [
   {
     icon: 'cloudoff',
     judul: 'Offline cache',
-    deskripsi: 'Hasil scan dan rekomendasi tersimpan di perangkat, siap dibuka di mana pun.',
+    deskripsi: 'Hasil scan dan rekomendasi tersimpan di perangkat, siap dibuka di mana pun tanpa koneksi.',
   },
   {
     icon: 'lock',
-    judul: 'Enkripsi data',
-    deskripsi: 'Data ladang Anda dienkripsi dan tidak pernah dijual kepada pihak ketiga.',
+    judul: 'Enkripsi AES-256',
+    deskripsi: 'Data ladang Anda dienkripsi AES-256 dan tidak pernah dijual kepada pihak ketiga.',
   },
   {
     icon: 'leaf',
-    judul: 'Sumber rekomendasi',
+    judul: 'Katalog terverifikasi',
     deskripsi: 'Setiap saran berdasar pustaka penyakit dan pupuk yang diverifikasi ahli pertanian lokal.',
   },
 ];
@@ -104,11 +110,11 @@ const qr = Array.from({ length: 21 }, (_, r) =>
             AI VISION TERESTRIAL
           </p>
           <h1 class="font-display font-bold tracking-tight text-sawah-deep text-[clamp(2rem,5.5vw,3.5rem)]">
-            Bertani presisi, mulai dari satu foto daun.
+            Bertani Presisi, Mulai dari Satu Foto.
           </h1>
           <p class="mt-6 max-w-lg text-lg text-sawah-deep/70">
-            AgriNova membaca cuaca, mendeteksi penyakit tanaman, dan mengingatkan jadwal tanam — bahkan saat
-            sinyal susah.
+            AgriNova mendeteksi penyakit daun dengan AI, membaca cuaca real-time, dan mengingatkan jadwal tanam
+            — bahkan saat sinyal susah.
           </p>
           <div class="mt-10 flex flex-wrap items-center gap-4">
             <a
@@ -184,60 +190,56 @@ const qr = Array.from({ length: 21 }, (_, r) =>
           <FeatureCard
             icon="target"
             title="NovaScan"
-            description="Identifikasi instan hama dan penyakit hanya dengan mengambil foto daun atau batang tanaman yang bermasalah."
+            description="Identifikasi instan hama dan penyakit hanya dengan mengambil foto daun atau batang tanaman yang bermasalah. Model AI membandingkan bercak dengan pustaka penyakit padi lokal."
             variant="large"
             class="md:col-span-2 md:row-span-2"
             badges={[
               { label: 'AI Vision', tone: 'sky' },
               { label: 'Offline Mode', tone: 'gold' },
             ]}
-          />
+          >
+            <Fragment slot="sticker" set:html={stickerScan} />
+          </FeatureCard>
 
           <!-- NovaWeather (kecil) -->
           <FeatureCard
             icon="suncloud"
-            title="Mikro Cuaca"
-            description="Prakiraan cuaca spesifik hingga level desa, bukan sekadar prediksi kabupaten."
+            title="NovaWeather"
+            description="Cuaca real-time & prakiraan 7 hari via OpenWeatherMap, deteksi risiko hama berbasis cuaca, dan peringatan iklim darurat."
             class="md:col-span-1"
           />
 
           <!-- Asisten Tani (kecil) -->
           <FeatureCard
             icon="chat"
-            title="Asisten Tani AI"
-            description="Tanya jawab pertanian 24/7 dengan bahasa daerah lokal."
+            title="Asisten Tani"
+            description="Chatbot khusus pertanian bertenang Gemini 2.5 Flash. Tanya soal hama, pupuk, atau cuaca, kapan saja."
             tone="deep"
             class="md:col-span-1"
           />
 
-          <!-- Katalog Obat (kecil) -->
+          <!-- Katalog Obat Tanaman (kecil) -->
           <FeatureCard
             icon="pill"
-            title="Katalog Obat"
-            description="Rekomendasi takaran pupuk dan pestisida sesuai usia tanaman."
+            title="Katalog Obat Tanaman"
+            description="Direktori obat, pupuk, dan dosis aman dari database JSON offline — tanpa kuota internet."
             class="md:col-span-1"
           />
 
           <!-- NovaCalendar (besar) -->
-          <div class="clay-border hover-lift flex flex-col rounded-xl bg-mist-paper p-8 md:col-span-2 md:flex-row md:items-center md:gap-10">
-            <div class="flex-1">
-              <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-clay-soil/10 text-clay-soil">
-                <Icon name="calendar" class="h-6 w-6" />
-              </div>
-              <h3 class="mt-5 font-display text-xl text-sawah-deep">Jadwal Tanam Dinamis</h3>
-              <p class="mt-2 max-w-md text-base text-sawah-deep/70">
-                Kalender pintar yang menyesuaikan jadwal tanam, pupuk, dan panen berdasarkan data iklim
-                real-time, bukan hanya tanggal kalender.
-              </p>
-            </div>
-            <div class="mt-8 w-full rounded-lg border border-clay-soil/25 bg-mist-paper p-4 md:mt-0 md:w-1/3" aria-hidden="true">
-              <div class="h-4 w-3/4 rounded bg-terrace-green/20"></div>
-              <div class="mt-2 h-4 w-1/2 rounded bg-paddy-gold/40"></div>
-              <div class="mt-8 flex h-8 items-center justify-center rounded border border-sky-data/40 bg-sawah-deep">
-                <span class="font-mono text-data text-mist-paper/90">Fase Vegetatif</span>
-              </div>
-            </div>
-          </div>
+          <FeatureCard
+            icon="calendar"
+            title="NovaCalendar"
+            description="Kalender tanam pintar yang menyesuaikan jadwal semprot, pemupukan, dan panen berdasarkan data iklim real-time — bukan hanya tanggal kalender."
+            variant="large"
+            class="md:col-span-2"
+            badges={[
+              { label: 'Jadwal Adaptif', tone: 'sky' },
+              { label: 'Peringatan Hama', tone: 'gold' },
+            ]}
+          >
+            <Fragment slot="sticker" set:html={stickerCalendar} />
+          </FeatureCard>
         </div>
       </div>
     </section>

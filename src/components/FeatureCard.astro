@@ -20,6 +20,7 @@ const { icon, title, description, variant = 'small', tone = 'paper', badges = []
 
 const isDeep = tone === 'deep';
 const isLarge = variant === 'large';
+const hasSticker = Astro.slots.has('sticker');
 
 const badgeTone: Record<Badge['tone'], string> = {
   sky: 'bg-sky-data/20 text-mist-paper dark:text-sawah-deep',
@@ -32,6 +33,15 @@ const badgeTone: Record<Badge['tone'], string> = {
     isDeep ? 'bg-sawah-deep' : 'bg-mist-paper'
   } ${isLarge ? 'p-8' : 'p-6'} ${className}`}
 >
+  {/* Sticker illustration — only for large cards */}
+  {hasSticker && isLarge && (
+    <div class="mb-4 flex justify-center">
+      <div class="h-32 w-32">
+        <slot name="sticker" />
+      </div>
+    </div>
+  )}
+
   <div
     class={`flex items-center rounded-lg ${
       isDeep ? 'bg-mist-paper/10 text-paddy-gold' : 'bg-terrace-green/10 text-terrace-green dark:text-sawah-deep'

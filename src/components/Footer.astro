@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import Logo from './Logo.astro';
 
 const perusahaan = [
   { label: 'Tentang Kami', href: '#top' },
@@ -17,11 +18,8 @@ const legal = [
 <footer class="bg-sawah-deep">
   <div class="container-agrinova grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 md:grid-cols-4">
     <div class="sm:col-span-2">
-      <a href="#top" class="mb-4 inline-flex items-center gap-3" aria-label="AgriNova">
-        <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-terrace-green text-mist-paper dark:text-sawah-deep">
-          <Icon name="leaf" class="h-5 w-5" />
-        </span>
-        <span class="font-display text-xl font-bold text-mist-paper">AgriNova</span>
+      <a href="#top" class="mb-4 inline-flex items-center" aria-label="AgriNova">
+        <Logo class="h-8 w-auto" reversed />
       </a>
       <p class="mt-4 max-w-sm text-sm text-mist-paper/60">
         Memberdayakan Petani dengan AI Terestrial. Solusi presisi untuk hasil panen yang lebih baik.
